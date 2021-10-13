@@ -1,1 +1,3 @@
 # diag-plus
+
+## Installation
