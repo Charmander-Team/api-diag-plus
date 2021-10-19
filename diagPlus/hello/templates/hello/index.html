@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    {% if list_all_user %}
+    <ul>
+      {% for user in list_all_user %}
+      <li>
+        <a href="/polls/{{ user.id }}/">{{ user.username }} </a>
+        {{user.name}} {{user.lastname}}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No users are available.</p>
+    {% endif %}
+  </body>
+</html>
