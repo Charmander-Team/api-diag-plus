@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +23,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # NEVER PUT YOUR SECRET KEY HERE. Put it in a .env file 
-SECRET_KEY = config('SECRET_KEY')
+env = environ.Env()
+# Read the .env file
+environ.Env().read_env()
+SECRET_KEY = env('SECRET_KEY')
+
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# Local database for now
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env("DATABASE_NAME"), # Database Name
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST' : env('DATABASE_HOST'),
+    }
+}
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,22 +91,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'diagPlus.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-# Local database for now
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'alex', # Database Name
-        'USER': 'alex',
-        'PASSWORD': 'root',
-        'HOST' : 'localhost',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

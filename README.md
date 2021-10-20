@@ -34,6 +34,10 @@ python3 manager.py runserver
 
 Pour le test, normalement ce sera `localhost:8000/hello`. Ca devra afficher un ̀`Hello World` sur la page
 
+> - Pour sécuriser Django, il faut isoler la clé secrète créée et les identifiants de votre base de données. Il faudra installer python-environ en ligne de commande.
+> - Une fois installé, vous devez créer un .env où vous allez stocker votre clé secrète et les informations de connexion de votre base de données
+> Le contenu du .env doit ressembler à la structure dans `.env.example` qui se situe dans le même dossier que `settings.py`
+
 ### PostgreSQL et Django
 
 Pour utiliser PostgreSQL, il va falloir l'installer avec la commande.
