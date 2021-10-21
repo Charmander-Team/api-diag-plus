@@ -10,6 +10,7 @@ media
 *.pot
 *.py[co]
 .tox/
+.vscode
 __pycache__
 MANIFEST
 dist/
@@ -20,3 +21,4 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+env/

@@ -1,5 +1,6 @@
-# diag-plus
+# Diag-plus
 
+Projet de 4ème année de Développement Web avec **Python** et **ReactJs**.
 ## Mise en place 
 
 Installation de Python sur linux (la commande dépend de la distribution)
@@ -38,48 +39,18 @@ Pour le test, normalement ce sera `localhost:8000/hello`. Ca devra afficher un �
 > - Une fois installé, vous devez créer un .env où vous allez stocker votre clé secrète et les informations de connexion de votre base de données
 > Le contenu du .env doit ressembler à la structure dans `.env.example` qui se situe dans le même dossier que `settings.py`
 
-### PostgreSQL et Django
+## PostgreSQL et Django
 
-Pour utiliser PostgreSQL, il va falloir l'installer avec la commande.
+[Voir le fichier DB_Setup.md](DB_Setup.md)
 
-```bash
-sudo apt-get install postgres
-```
+## API
 
-Une fois installé, lancer cette commande : 
+Voir ici : [API](API.md)
 
-```bash
-sudo -u postgres createuser --interactive
-```
+## Credits
 
-Cette commande va permettre de créer un utilisateur dans Postgres.
+Daniel-Christian AMBANG
 
-De base avec Postgres, tout utilisateur dispose d'une base de données **à son nom**, c'est-à-dire qu'il va essayer de se connecter à une base de données identique au nom d'utilsateur en premier (par défaut). Pour éviter de perdre trop de temps, on va faire comme ça. Entrez cette commande:
+Alexandre TO
 
-```bash
-sudo -u postgres createdb votre_username
-```
-
-Une fois crée, il faut ajouter l'username avec ceci : 
-
-```bash
-sudo adduser votre_username
-```
-
-Pour finir, pour avoir accès à votre base de données,
-
-```bash
-sudo -i -u votre_username
-```
-
-Après avoir créer un modèle dans l'application, il faut générer la migration avec cette commande : 
-
-```bash
-python manage.py makemigrations nom_app
-```
-
-Pour lancer la migration, utiliser cette commande : 
-
-```bash
-python manage.py migrate
-```
+Antoine WITKOWSKI
