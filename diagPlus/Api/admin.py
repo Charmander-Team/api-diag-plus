@@ -1,13 +1,13 @@
+""" Admin Panel"""
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
 
-# Custom form to create an user from the admin panel
-
 
 class CustomUserAdmin(UserAdmin):
+    """Custom Form for user creation on the admin panel"""
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
