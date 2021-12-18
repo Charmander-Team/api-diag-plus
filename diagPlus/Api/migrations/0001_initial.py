@@ -17,22 +17,33 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('first_name', models.CharField(max_length=255, verbose_name='First Name')),
-                ('last_name', models.CharField(max_length=255, verbose_name='Last Name')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='Email address')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('password', models.CharField(
+                    max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(
+                    blank=True, null=True, verbose_name='last login')),
+                ('is_superuser', models.BooleanField(default=False,
+                 help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
+                ('first_name', models.CharField(
+                    max_length=255, verbose_name='First Name')),
+                ('last_name', models.CharField(
+                    max_length=255, verbose_name='Last Name')),
+                ('email', models.EmailField(max_length=254,
+                 unique=True, verbose_name='Email address')),
                 ('address', models.TextField(verbose_name='Address')),
-                ('phone', phonenumber_field.modelfields.PhoneNumberField(max_length=128, region=None)),
+                ('phone', phonenumber_field.modelfields.PhoneNumberField(
+                    max_length=128, region=None)),
                 ('zip_code', models.CharField(max_length=10, verbose_name='ZipCode')),
                 ('city', models.CharField(max_length=123, verbose_name='City')),
                 ('is_staff', models.BooleanField(default=False)),
                 ('is_active', models.BooleanField(default=True)),
-                ('date_joined', models.DateTimeField(default=django.utils.timezone.now)),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
+                ('date_joined', models.DateTimeField(
+                    default=django.utils.timezone.now)),
+                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+                 related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
+                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.',
+                 related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
             ],
             options={
                 'abstract': False,
