@@ -22,3 +22,4 @@ tests/.coverage
 build/
 tests/report/
 env/
+.DS_Store
