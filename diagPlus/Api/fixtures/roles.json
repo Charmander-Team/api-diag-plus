@@ -1,0 +1,16 @@
+[
+    {
+        "model": "Api.Role",
+        "pk": 1,
+        "fields": {
+            "title": "Utilisateur"
+        }
+    },
+    {
+        "model": "Api.Role",
+        "pk": 2,
+        "fields": {
+            "title": "Administrateur"
+        }
+    }
+]

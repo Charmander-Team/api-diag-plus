@@ -1,5 +1,6 @@
 # Diag-plus
-
+Repo pour l'API du projet.
+Pour le front-end et back-end, le repo est sur [ce lien](https://github.com/antoine-witkowski/fo-diag-plus)
 Projet de 4ème année de Développement Web avec **Python** et **ReactJs**.
 ## Mise en place 
 

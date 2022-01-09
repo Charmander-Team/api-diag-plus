@@ -29,7 +29,7 @@ sudo adduser votre_username
 Pour finir, pour avoir accès à votre base de données,
 
 ```bash
-sudo -i -u votre_username
+psql db_name username
 ```
 
 Après avoir créer un modèle dans l'application, il faut générer la migration avec cette commande : 

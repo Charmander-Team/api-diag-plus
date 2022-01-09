@@ -6,6 +6,12 @@ from django.utils import timezone
 
 from .managers import CustomUserManager
 
+class Role(models.Model):
+    title = models.CharField("Title", max_length=100, unique=True)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User model"""
@@ -19,6 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, default=1)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
