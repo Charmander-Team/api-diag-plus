@@ -8,15 +8,15 @@ Cela va vous rediriger vers l'api de notre future site internet.
 Voici des screenshots sur le début de l'api :
 
 > **GET**
-![GET](Screenshot_20211021_222808.png)
+![GET](Photos/Screenshot_20211021_222808.png)
 
 > **POST**
-![POST](post.png)
+![POST](Photos/post.png)
 
 > **DELETE**
-![DELETE](delete.png)
+![DELETE](Photos/delete.png)
 
 > **PUT**
-![PUT](put.png)
+![PUT](Photos/put.png)
 
 Il faut manuellement taper l'id de l'utilisateur pour pouvoir accès au **DELETE** et au **PUT** (par exemple : `http://127.0.0.1:8000/api/users/1`).

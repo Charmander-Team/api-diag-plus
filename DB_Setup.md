@@ -1,6 +1,6 @@
 # PostgreSQL et Django
 
-Pour utiliser PostgreSQL, il va falloir l'installer avec la commande.
+Pour utiliser PostgreSQL, il va falloir l'installer avec la commande. (Depend de votre distribution linux)
 
 ```bash
 sudo apt-get install postgres

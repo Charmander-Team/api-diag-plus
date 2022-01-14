@@ -1,19 +1,22 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Speciality
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
-            'first_name',
-            'last_name',
             'email',
-            'address',
-            'phone',
-            'zip_code',
-            'city',
-            'is_staff',
             'is_active',
             'date_joined',
         )
         model = User
+
+
+class SpecialitySerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'name',
+            'definition'
+        )
+        model: Speciality

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User
+from .models import *
 
 
 class CustomUserAdmin(UserAdmin):
@@ -14,14 +14,13 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'first_name',
-         'last_name', 'address', 'phone', 'zip_code', 'city', 'role')}),
+        (None, {'fields': ('email', 'password')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active', 'first_name', 'last_name', 'phone', 'address', 'zip_code', 'city')}
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
          ),
     )
     search_fields = ('email',)
@@ -29,3 +28,17 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Speciality)
+admin.site.register(Question)
+admin.site.register(Patient)
+admin.site.register(ReportPatient)
+admin.site.register(Files)
+admin.site.register(Appointment)
+admin.site.register(Praticien)
+admin.site.register(Admin)
+admin.site.register(Planning)
+admin.site.register(Diagnostic)
+admin.site.register(Response)
+admin.site.register(Reason)
+admin.site.register(Symptom)
+admin.site.register(Pathology)
