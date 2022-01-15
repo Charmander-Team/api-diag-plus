@@ -12,7 +12,7 @@ sudo apt-get install python3
 
 ## Pré requis
 
-Pour lancer ce projet, il est **conseillé** de travailler dans un environnement virtuel de Python. Cela va isoler les packages Python et les installer dans un dossier à part qui sera utilisé que dans l'environnement virtuel. Il existe plusieurs packages pour cela dont `virtualenv`  et `pipenv`.
+Pour lancer ce projet, il est **conseillé** de travailler dans un environnement virtuel de Python. Cela va isoler les packages Python et les installer dans un dossier à part qui sera utilisé que dans l'environnement virtuel. Il existe plusieurs packages pour cela dont `virtualenv`  clet `pipenv`.
 
 Avec `virtualenv`, il va falloir entrer la commande qui va permettre de créer un environnement virtuel.
 
@@ -49,7 +49,7 @@ Pour pouvoir lancer le serveur local, il faudra se situer dans le dossier diagPl
 Une fois dans ce dossier, il faudra lancer la commande
 
 ```bash
-python3 manager.py runserver
+python3 manage.py runserver
 ```
 
 > - Pour sécuriser Django, il faut isoler la clé secrète créée et les identifiants de votre base de données. Il faudra installer python-environ en ligne de commande.

@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    permission = models.PositiveIntegerField()  # Indique le rôle de l'utilisateur
+    permission = models.PositiveIntegerField(default=1)  # Indique le rôle de l'utilisateur
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
