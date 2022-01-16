@@ -47,7 +47,7 @@ DATABASES = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['139.59.133.166']
+ALLOWED_HOSTS = ['api.diag-plus.tk']
 
 
 # Application definition
