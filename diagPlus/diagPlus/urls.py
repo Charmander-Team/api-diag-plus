@@ -23,7 +23,13 @@ from rest_framework_simplejwt.views import (
 )
 
 router = routers.DefaultRouter()
+
+# Api Routes
 router.register(r'users', views.ListUser, 'user')
+router.register(r'specialities', views.ListSpeciality,'speciality')
+router.register(r'questions', views.ListQuestion, 'question')
+router.register(r'attachements', views.ListAttachment, 'attachment')
+router.register(r'patients', views.ListPatient, 'patient')
 router.register('admin/users', views.AdminUser, 'admin-user' )
 
 urlpatterns = [

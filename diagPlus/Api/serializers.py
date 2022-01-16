@@ -1,5 +1,20 @@
+from dataclasses import field
 from rest_framework import serializers
-from .models import User, Speciality
+from .models import *
+
+
+class CommonInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'first_name',
+            'last_name',
+            'telephone',
+            'address',
+            'city',
+            'zipcode'
+        )
+        model: CommonInfo
+        abstract = True
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,4 +34,39 @@ class SpecialitySerializer(serializers.ModelSerializer):
             'name',
             'definition'
         )
-        model: Speciality
+        model = Speciality
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'title',
+            'type',
+            'domain'
+        )
+        model = Question
+
+
+class AttachementSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id_type',
+            'type',
+            'name'
+        )
+        model = Attachment
+
+
+class PatientSerializer(CommonInfoSerializer):
+    users = UserSerializer(many=False,  read_only=True)
+    class Meta:
+        fields = (
+            'birth_date',
+            'weight',
+            'height',
+            'origin',
+            'smoker',
+            'is_drinker',
+            'users'
+        )
+        model = Patient
