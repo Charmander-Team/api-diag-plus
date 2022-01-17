@@ -1,7 +1,17 @@
 from dataclasses import field
 from rest_framework import serializers
 from .models import *
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+
+# Claim Token
+class TokenPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super(TokenPairSerializer, cls).get_token(user)
+        
+        token['email'] = user.email
+        return token
 
 class CommonInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -70,3 +80,51 @@ class PatientSerializer(CommonInfoSerializer):
             'users'
         )
         model = Patient
+
+class AdminSerializer(serializers.ModelSerializer):
+    users = UserSerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'first_name',
+            'last_name',
+            'users'
+        )
+        model = Admin
+
+class PraticienSerializer(CommonInfoSerializer):
+    speciality = SpecialitySerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'speciality'
+        )
+        model = Praticien
+
+class FileSerializer(serializers.ModelSerializer):
+    patients = PatientSerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'antecedent',
+            'allergy',
+            'important_act',
+            'organ_donation',
+            'previous_medication',
+            'current_medication',
+            'patients'
+        )
+        model = Files
+
+class ReportPatientSerializer(serializers.ModelSerializer):
+    patients = PatientSerializer(many=False, read_only=False)
+    attachments = AttachementSerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'type',
+            'contenu',
+            'patients',
+            'attachments'
+        )
+        model = ReportPatient
