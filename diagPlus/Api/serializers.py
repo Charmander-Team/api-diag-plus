@@ -9,9 +9,10 @@ class TokenPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super(TokenPairSerializer, cls).get_token(user)
-        
+
         token['email'] = user.email
         return token
+
 
 class CommonInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,6 +70,7 @@ class AttachementSerializer(serializers.ModelSerializer):
 
 class PatientSerializer(CommonInfoSerializer):
     users = UserSerializer(many=False,  read_only=True)
+
     class Meta:
         fields = (
             'birth_date',
@@ -81,6 +83,7 @@ class PatientSerializer(CommonInfoSerializer):
         )
         model = Patient
 
+
 class AdminSerializer(serializers.ModelSerializer):
     users = UserSerializer(many=False, read_only=False)
 
@@ -92,6 +95,7 @@ class AdminSerializer(serializers.ModelSerializer):
         )
         model = Admin
 
+
 class PraticienSerializer(CommonInfoSerializer):
     speciality = SpecialitySerializer(many=False, read_only=False)
 
@@ -100,6 +104,7 @@ class PraticienSerializer(CommonInfoSerializer):
             'speciality'
         )
         model = Praticien
+
 
 class FileSerializer(serializers.ModelSerializer):
     patients = PatientSerializer(many=False, read_only=False)
@@ -116,6 +121,7 @@ class FileSerializer(serializers.ModelSerializer):
         )
         model = Files
 
+
 class ReportPatientSerializer(serializers.ModelSerializer):
     patients = PatientSerializer(many=False, read_only=False)
     attachments = AttachementSerializer(many=False, read_only=False)
@@ -128,3 +134,91 @@ class ReportPatientSerializer(serializers.ModelSerializer):
             'attachments'
         )
         model = ReportPatient
+
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    patients = PatientSerializer(many=False, read_only=False)
+    praticiens = PraticienSerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'start_hour',
+            'end_hour',
+            'date',
+            'reason',
+            'physical',
+            'patients',
+            'praticiens'
+        )
+        model = Appointment
+
+class PlanningSerializer(serializers.ModelSerializer):
+    praticiens = PraticienSerializer(many=False, read_only=False)
+    
+    class Meta:
+        fields = (
+            'current_date',
+            'start_hours',
+            'end_hours',
+            'praticiens'
+        )
+        model = Planning
+
+class DiagnosticSerializer(serializers.ModelSerializer):
+    praticiens = PraticienSerializer(many=False, read_only=False)
+
+    class Meta: 
+        fields = (
+            'reason',
+            'pathology_bot',
+            'pathology_praticien',
+            'percentage',
+            'patients',
+            'praticiens'
+        )
+        model = Diagnostic
+
+class ResponseSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=False, read_only=False)
+    diagnostics = DiagnosticSerializer(many=False, read_only=False) 
+    class Meta: 
+        fields = (
+            'response',
+            'diagnostics',
+            'questions'
+        )
+        model = Response
+
+class PathologySerializer(serializers.ModelSerializer):
+    speciality = SpecialitySerializer(many=False, read_only=False)
+
+    class Meta: 
+        fields = (
+            'name',
+            'detail',
+            'praticien_speciality',
+            'speciality'
+        )
+        model = Pathology
+
+class ReasonSerializer(serializers.ModelSerializer):
+    pathologies = PathologySerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'name',
+            'detail',
+            'pathologies'
+        )
+        model = Reason
+
+class SymptomSerializer(serializers.ModelSerializer):
+    pathologies = PathologySerializer(many=False, read_only=False)
+
+    class Meta:
+        fields = (
+            'name',
+            'detail',
+            'pathologies'
+        )
+        model = Symptom

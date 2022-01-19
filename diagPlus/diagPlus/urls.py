@@ -20,6 +20,13 @@ router.register(r'admin', views.ListAdmin, 'admin')
 router.register(r'praticien', views.ListPraticien, 'praticien')
 router.register(r'files', views.ListFiles, 'file')
 router.register(r'report patient', views.ListReportPatient, 'report patient')
+router.register(r'appointments', views.ListAppointment, 'appointment')
+router.register(r'plannings', views.ListPlanning, 'planning')
+router.register(r'diagnostics', views.ListDiagnostic, 'diagnostic')
+router.register(r'responses', views.ListResponse, 'response')
+router.register(r'pathologies', views.ListPathology, 'pathology')
+router.register(r'reasons', views.ListReason, 'reason')
+router.register(r'symptoms', views.ListSymptom, 'symptom')
 router.register(r'admin/users', views.AdminUser, 'admin-user' )
 
 # Patterns
