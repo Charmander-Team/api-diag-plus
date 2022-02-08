@@ -4,7 +4,6 @@ from rest_framework import routers
 from Api import views
 from Api.views import *
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
 
