@@ -5,12 +5,15 @@ before_script:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
+    - apt-get install -y apt-utils
+    - apt-get install net-tools python3.8 python3-pip
+    - apt-get -y upgrade
+    - pip3 install -r diagPlus/requirements.txt
   
 # 4 stages
 stages:
     - install
     - test
-    - build
     - deploy
 
 # 4th job STAGING DEPLOY (on Heroku)
