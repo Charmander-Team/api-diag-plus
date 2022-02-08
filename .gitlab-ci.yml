@@ -16,6 +16,7 @@ stages:
     - test
     - deploy
 
+# cache builds
 cache:
   paths:
     - ~/.cache/pip/
