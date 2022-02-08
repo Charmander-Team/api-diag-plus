@@ -6,7 +6,7 @@ before_script:
     - apt-get install -y ruby-dev
     - gem install dpl
     - apt-get install -y apt-utils
-    - apt-get install net-tools python3 python3-pip
+    - apt-get install -y net-tools python3 python3-pip
     - apt-get -y upgrade
     - pip3 install -r diagPlus/requirements.txt
   
