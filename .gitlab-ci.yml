@@ -26,6 +26,7 @@ fo-deploy-staging:
     stage: deploy
     image: ruby:latest
     script:
+        - pip3 install -r diagPlus/requirements.txt
         - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
     only:
         - Api
