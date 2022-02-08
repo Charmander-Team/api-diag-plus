@@ -1,0 +1,23 @@
+image: node:latest
+
+# Must Use for Heroku deploy
+before_script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+  
+# 4 stages
+stages:
+    - install
+    - test
+    - build
+    - deploy
+
+# 4th job STAGING DEPLOY (on Heroku)
+fo-deploy-staging:
+    stage: deploy
+    image: ruby:latest
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    only:
+        - Api
