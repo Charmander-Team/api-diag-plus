@@ -16,6 +16,10 @@ stages:
     - test
     - deploy
 
+cache:
+  paths:
+    - ~/.cache/pip/
+
 # 4th job STAGING DEPLOY (on Heroku)
 fo-deploy-staging:
     stage: deploy
