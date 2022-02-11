@@ -1,1 +1,1 @@
-web: gunicorn diagplus.wsgi --log-file -
+web: gunicorn diagplus.wsgi --log-file
