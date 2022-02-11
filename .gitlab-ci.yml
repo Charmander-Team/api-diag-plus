@@ -9,8 +9,6 @@ default:
     services:
         - postgres:latest
 
-    image: ubuntu:20.04
-
     cache:
         paths:
             - ~/.cache/pip/
