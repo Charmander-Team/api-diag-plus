@@ -153,3 +153,9 @@ class Symptom(models.Model):
     detail = models.CharField('Detail', max_length=255)
     pathologies = models.ForeignKey(
         Pathology, on_delete=models.CASCADE, default=1)
+
+class Article(models.Model):
+    title = models.CharField('Article', max_length=255)
+    image = models.ImageField(upload_to='images')
+    description = models.TextField('Description')
+    date = models.DateField()

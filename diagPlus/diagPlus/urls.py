@@ -26,6 +26,7 @@ router.register(r'responses', views.ListResponse, 'response')
 router.register(r'pathologies', views.ListPathology, 'pathology')
 router.register(r'reasons', views.ListReason, 'reason')
 router.register(r'symptoms', views.ListSymptom, 'symptom')
+router.register(r'articles', views.ListArticle, 'article')
 router.register(r'admin/users', views.AdminUser, 'admin-user' )
 
 # Patterns

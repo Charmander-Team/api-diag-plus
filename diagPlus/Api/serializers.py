@@ -222,3 +222,13 @@ class SymptomSerializer(serializers.ModelSerializer):
             'pathologies'
         )
         model = Symptom
+
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'title',
+            'image',
+            'description',
+            'date'
+        )
+        model = Article

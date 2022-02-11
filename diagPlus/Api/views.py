@@ -97,3 +97,9 @@ class AdminUser(viewsets.ModelViewSet):
 class GetTokenPair(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = TokenObtainPairSerializer
+
+class ListArticle(viewsets.ModelViewSet):
+    serializer_class = ArticleSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Article.objects.all()
+ 
