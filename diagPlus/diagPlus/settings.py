@@ -100,8 +100,8 @@ TEMPLATES = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
-MEDIA_URL ='/images/'
-MEDIA_ROOT=os.path.join(BASE_DIR, "images")
+MEDIA_URL ='/image/'
+MEDIA_ROOT=os.path.join(BASE_DIR, "media")
 
 WSGI_APPLICATION = 'diagPlus.wsgi.application'
 

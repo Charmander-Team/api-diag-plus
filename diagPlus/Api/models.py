@@ -156,6 +156,6 @@ class Symptom(models.Model):
 
 class Article(models.Model):
     title = models.CharField('Article', max_length=255)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='')
     description = models.TextField('Description')
     date = models.DateField()
