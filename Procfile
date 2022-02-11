@@ -1,1 +1,0 @@
-web: gunicorn diagplus.wsgi --log-file
