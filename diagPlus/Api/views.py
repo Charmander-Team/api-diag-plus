@@ -10,7 +10,6 @@ from .permissions import isAdminAuthenticated
 class ListUser(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class ListSpeciality(viewsets.ModelViewSet):
     serializer_class = SpecialitySerializer
