@@ -49,7 +49,7 @@ DATABASES = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api.diag-plus.tk', '127.0.0.1']
+ALLOWED_HOSTS = ['api.diag-plus.tk', '127.0.0.1', 'https://api.diag-plus.tk']
 
 
 # Application definition
@@ -192,3 +192,7 @@ SIMPLE_JWT = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = ['https://api.diag-plus.tk']
