@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'Api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+SWAGGER_SETTINGS= {
+    'SECURITY_DEFINITIONS': {
+      'Basic': {
+            'type': 'basic'
+      },
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+    },
+    'USE_SESSION_AUTH': False,
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -153,7 +168,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 
-    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

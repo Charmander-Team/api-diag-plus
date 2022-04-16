@@ -101,7 +101,7 @@ class PraticienSerializer(CommonInfoSerializer):
 
     class Meta:
         fields = (
-            'speciality'
+            'speciality',
         )
         model = Praticien
 
@@ -171,7 +171,7 @@ class DiagnosticSerializer(serializers.ModelSerializer):
         fields = (
             'reason',
             'pathology_bot',
-            'pathology_praticien',
+            'pathology_practicien',
             'percentage',
             'patients',
             'praticiens'
@@ -196,7 +196,7 @@ class PathologySerializer(serializers.ModelSerializer):
         fields = (
             'name',
             'detail',
-            'praticien_speciality',
+            'practicien_speciality',
             'speciality'
         )
         model = Pathology

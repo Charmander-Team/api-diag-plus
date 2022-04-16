@@ -67,6 +67,10 @@ python3 manage.py runserver
 
 Voir ici : [API](API.md)
 
+
+## Documentation de l'API
+
+La documentation de l'api est accessible sur la route `/api/doc`. Pour pouvoir ajouter / supprimer / modifier des tables protégées, il faudra générer un token JWT et le mettre dans l'authentification.
 ## Credits
 
 Daniel-Christian AMBANG
