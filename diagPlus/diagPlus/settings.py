@@ -144,7 +144,7 @@ SWAGGER_SETTINGS= {
             'type': 'basic'
       },
       'Bearer': {
-            'type': 'oauth2',
+            'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
       }
