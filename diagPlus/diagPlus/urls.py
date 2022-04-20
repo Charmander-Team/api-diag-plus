@@ -35,7 +35,7 @@ router.register(r'articles', views.ListArticle, 'article')
 router.register(r'admin/users', views.AdminUser, 'admin-user' )
 
 # Patterns
-
+# Need to add the https url in get_schema_view in order to be able to use the api doc
 schema_view = get_schema_view(
    openapi.Info(
       title="Snippets API",
@@ -46,6 +46,7 @@ schema_view = get_schema_view(
       license=openapi.License(name="BSD License"),
    ),
    public=True,
+   #url='https://127.0.0.1:8000/api/doc'
 )
 urlpatterns = [
     path('admin/', admin.site.urls),

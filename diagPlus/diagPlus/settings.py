@@ -144,12 +144,13 @@ SWAGGER_SETTINGS= {
             'type': 'basic'
       },
       'Bearer': {
-            'type': 'apiKey',
+            'type': 'oauth2',
             'name': 'Authorization',
             'in': 'header'
       }
     },
     'USE_SESSION_AUTH': False,
+    
 }
 
 
