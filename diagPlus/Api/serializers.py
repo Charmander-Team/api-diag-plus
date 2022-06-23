@@ -36,12 +36,15 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'is_active',
             'date_joined',
+            'first_name',
+            'last_name'
         )
         model = User
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
 
 class SpecialitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -156,9 +159,10 @@ class AppointmentSerializer(serializers.ModelSerializer):
         )
         model = Appointment
 
+
 class PlanningSerializer(serializers.ModelSerializer):
     praticiens = PraticienSerializer(many=False, read_only=False)
-    
+
     class Meta:
         fields = (
             'current_date',
@@ -168,10 +172,11 @@ class PlanningSerializer(serializers.ModelSerializer):
         )
         model = Planning
 
+
 class DiagnosticSerializer(serializers.ModelSerializer):
     praticiens = PraticienSerializer(many=False, read_only=False)
 
-    class Meta: 
+    class Meta:
         fields = (
             'reason',
             'pathology_bot',
@@ -182,10 +187,12 @@ class DiagnosticSerializer(serializers.ModelSerializer):
         )
         model = Diagnostic
 
+
 class ResponseSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=False, read_only=False)
-    diagnostics = DiagnosticSerializer(many=False, read_only=False) 
-    class Meta: 
+    diagnostics = DiagnosticSerializer(many=False, read_only=False)
+
+    class Meta:
         fields = (
             'response',
             'diagnostics',
@@ -193,10 +200,11 @@ class ResponseSerializer(serializers.ModelSerializer):
         )
         model = Response
 
+
 class PathologySerializer(serializers.ModelSerializer):
     speciality = SpecialitySerializer(many=False, read_only=False)
 
-    class Meta: 
+    class Meta:
         fields = (
             'name',
             'detail',
@@ -204,6 +212,7 @@ class PathologySerializer(serializers.ModelSerializer):
             'speciality'
         )
         model = Pathology
+
 
 class ReasonSerializer(serializers.ModelSerializer):
     pathologies = PathologySerializer(many=False, read_only=False)
@@ -216,6 +225,7 @@ class ReasonSerializer(serializers.ModelSerializer):
         )
         model = Reason
 
+
 class SymptomSerializer(serializers.ModelSerializer):
     pathologies = PathologySerializer(many=False, read_only=False)
 
@@ -226,6 +236,7 @@ class SymptomSerializer(serializers.ModelSerializer):
             'pathologies'
         )
         model = Symptom
+
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:

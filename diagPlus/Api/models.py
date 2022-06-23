@@ -27,7 +27,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    permission = models.PositiveIntegerField(default=1)  # Indique le rôle de l'utilisateur
+    permission = models.PositiveIntegerField(
+        default=1)  # Indique le rôle de l'utilisateur
+    first_name = models.CharField('First Name', max_length=255, default="")
+    last_name = models.CharField('Last Name', max_length=255, default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -153,6 +156,7 @@ class Symptom(models.Model):
     detail = models.CharField('Detail', max_length=255)
     pathologies = models.ForeignKey(
         Pathology, on_delete=models.CASCADE, default=1)
+
 
 class Article(models.Model):
     title = models.CharField('Article', max_length=255)
