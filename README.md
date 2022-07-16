@@ -1,6 +1,5 @@
 # Diag-plus
 Repo pour l'API du projet.
-Pour le front-end et back-end, le repo est sur [ce lien](https://github.com/antoine-witkowski/fo-diag-plus)
 
 Projet de 4ème année de Développement Web avec **Python** et **ReactJS**.
 ## Mise en place 
@@ -11,7 +10,7 @@ Installation de Python sur Linux (la commande dépend de la distribution)
 sudo apt-get install python3
 ```
 
-## Pré requis
+## Pré-requis
 
 Pour lancer ce projet, il est **conseillé** de travailler dans un environnement virtuel de Python. Cela va isoler les packages Python et les installer dans un dossier à part qui sera utilisé que dans l'environnement virtuel. Il existe plusieurs packages pour cela dont `virtualenv`  et `pipenv`.
 
@@ -55,18 +54,17 @@ Une fois dans ce dossier, il faudra lancer la commande
 python3 manage.py runserver
 ```
 
-> Pour sécuriser Django, il faut isoler la clé secrète créée et les identifiants de votre base de données.
-> Une fois installé, vous devez créer un .env où vous allez stocker votre clé secrète et les informations de connexion de votre base de données
-> Le contenu du .env doit ressembler à la structure dans `.env.example` qui se situe dans le même dossier que `settings.py`
+Pour sécuriser Django, il faut isoler la clé secrète créée et les identifiants de votre base de données.
+Une fois installé, vous devez créer un .env où vous allez stocker votre clé secrète et les informations de connexion de votre base de données
+Le contenu du .env doit ressembler à la structure dans `.env.example` qui se situe dans le même dossier que `settings.py`
 
 ## PostgreSQL et Django
 
-[Voir le fichier DB_Setup.md](DB_Setup.md)
+[Voir DB_Setup.md](DB_Setup.md)
 
 ## API
 
 Voir ici : [API](API.md)
-
 
 ## Documentation de l'API
 

@@ -90,6 +90,12 @@ class PatientSerializer(CommonInfoSerializer):
         )
         model = Patient
 
+    def create(self, validated_data):
+        user_data = validated_data.pop('users')
+        user = User.objects.create_user(**validated_data)
+        User.objects.create(user=user, **user_data)
+        return user
+
 
 class AdminSerializer(serializers.ModelSerializer):
     users = UserSerializer(many=False, read_only=False)
@@ -102,6 +108,12 @@ class AdminSerializer(serializers.ModelSerializer):
         )
         model = Admin
 
+    def create(self, validated_data):
+        user_data = validated_data.pop('users')
+        user = User.objects.create_user(**validated_data)
+        User.objects.create(user=user, **user_data)
+        return user
+
 
 class PraticienSerializer(CommonInfoSerializer):
     speciality = SpecialitySerializer(many=False, read_only=False)
@@ -111,6 +123,12 @@ class PraticienSerializer(CommonInfoSerializer):
             'speciality',
         )
         model = Praticien
+
+    def create(self, validated_data):
+        speciality_data = validated_data.pop('speciality')
+        speciality = Speciality.objects.create(**validated_data)
+        Speciality.objects.create(speciality=speciality, **speciality_data)
+        return speciality
 
 
 class FileSerializer(serializers.ModelSerializer):
@@ -128,6 +146,12 @@ class FileSerializer(serializers.ModelSerializer):
         )
         model = Files
 
+    def create(self, validated_data):
+        patient_data = validated_data.pop('patients')
+        patient = Patient.objects.create(**validated_data)
+        Patient.objects.create(patient=patient, **patient_data)
+        return patient
+
 
 class ReportPatientSerializer(serializers.ModelSerializer):
     patients = PatientSerializer(many=False, read_only=False)
@@ -141,6 +165,16 @@ class ReportPatientSerializer(serializers.ModelSerializer):
             'attachments'
         )
         model = ReportPatient
+
+    def create(self, validated_data):
+        patient_data = validated_data.pop('patients')
+        attachments_data = validated_data.pop('attachments')
+        patient = Patient.objects.create(**validated_data)
+        attachment = Attachment.objects.create(**validated_data)
+        Patient.objects.create(patient=patient, **patient_data)
+        Attachment.objects.create(
+            attachment=attachment, **attachments_data)
+        return patient, attachment
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -159,6 +193,15 @@ class AppointmentSerializer(serializers.ModelSerializer):
         )
         model = Appointment
 
+    def create(self, validated_data):
+        patient_data = validated_data.pop('patients')
+        praticien_data = validated_data.pop('praticiens')
+        patient = Patient.objects.create(**validated_data)
+        praticien = Praticien.objects.create(**validated_data)
+        Patient.objects.create(patient=patient, **patient_data)
+        Praticien.objects.create(praticien=praticien, **praticien_data)
+        return patient, praticien
+
 
 class PlanningSerializer(serializers.ModelSerializer):
     praticiens = PraticienSerializer(many=False, read_only=False)
@@ -171,6 +214,12 @@ class PlanningSerializer(serializers.ModelSerializer):
             'praticiens'
         )
         model = Planning
+
+    def create(self, validated_data):
+        praticien_data = validated_data.pop('praticiens')
+        praticien = Praticien.objects.create(**validated_data)
+        Praticien.objects.create(praticien=praticien, **praticien_data)
+        return praticien
 
 
 class DiagnosticSerializer(serializers.ModelSerializer):
@@ -187,6 +236,12 @@ class DiagnosticSerializer(serializers.ModelSerializer):
         )
         model = Diagnostic
 
+    def create(self, validated_data):
+        praticien_data = validated_data.pop('praticiens')
+        praticien = Praticien.objects.create(**validated_data)
+        Praticien.objects.create(praticien=praticien, **praticien_data)
+        return praticien
+
 
 class ResponseSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=False, read_only=False)
@@ -199,6 +254,15 @@ class ResponseSerializer(serializers.ModelSerializer):
             'questions'
         )
         model = Response
+
+    def create(self, validated_data):
+        diagnostic_data = validated_data.pop('diagnostics')
+        question_data = validated_data.pop('questions')
+        diagnostic = Diagnostic.objects.create(**validated_data)
+        question = Question.objects.create(**validated_data)
+        Question.objects.create(question=diagnostic, **question_data)
+        Diagnostic.objects.create(diagnostic=diagnostic, **diagnostic_data)
+        return diagnostic, question
 
 
 class PathologySerializer(serializers.ModelSerializer):
@@ -213,6 +277,12 @@ class PathologySerializer(serializers.ModelSerializer):
         )
         model = Pathology
 
+    def create(self, validated_data):
+        speciality_data = validated_data.pop('speciality')
+        speciality = Speciality.objects.create(**validated_data)
+        Speciality.objects.create(speciality=speciality, **speciality_data)
+        return speciality
+
 
 class ReasonSerializer(serializers.ModelSerializer):
     pathologies = PathologySerializer(many=False, read_only=False)
@@ -225,6 +295,12 @@ class ReasonSerializer(serializers.ModelSerializer):
         )
         model = Reason
 
+    def create(self, validated_data):
+        pathology_data = validated_data.pop('pathologies')
+        pathology = Pathology.objects.create(**validated_data)
+        Pathology.objects.create(pathology=pathology, **pathology_data)
+        return pathology
+
 
 class SymptomSerializer(serializers.ModelSerializer):
     pathologies = PathologySerializer(many=False, read_only=False)
@@ -236,6 +312,12 @@ class SymptomSerializer(serializers.ModelSerializer):
             'pathologies'
         )
         model = Symptom
+
+    def create(self, validated_data):
+        pathology_data = validated_data.pop('pathologies')
+        pathology = Pathology.objects.create(**validated_data)
+        Pathology.objects.create(pathology=pathology, **pathology_data)
+        return pathology
 
 
 class ArticleSerializer(serializers.ModelSerializer):
