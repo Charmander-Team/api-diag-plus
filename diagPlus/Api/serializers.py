@@ -28,16 +28,20 @@ class CommonInfoSerializer(serializers.ModelSerializer):
         abstract = True
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(CommonInfoSerializer):
     class Meta:
         fields = (
             'id',
             'email',
             'password',
+            'first_name',
+            'last_name',
+            'telephone',
+            'address',
+            'city',
+            'zipcode',
             'is_active',
             'date_joined',
-            'first_name',
-            'last_name'
         )
         model = User
 
@@ -117,18 +121,23 @@ class AdminSerializer(serializers.ModelSerializer):
 
 class PraticienSerializer(CommonInfoSerializer):
     speciality = SpecialitySerializer(many=False, read_only=False)
+    users = UserSerializer(many=False, read_only=False)
 
     class Meta:
         fields = (
             'speciality',
+            'users'
         )
         model = Praticien
 
     def create(self, validated_data):
+        user_data = validated_data.pop('user')
         speciality_data = validated_data.pop('speciality')
         speciality = Speciality.objects.create(**validated_data)
+        user = User.objects.create_user(**user_data)
         Speciality.objects.create(speciality=speciality, **speciality_data)
-        return speciality
+        User.objects.create(user=user, **user_data)
+        return speciality, user
 
 
 class FileSerializer(serializers.ModelSerializer):

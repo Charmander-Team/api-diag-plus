@@ -12,15 +12,15 @@ class CommonInfo(models.Model):
     first_name = models.CharField('First Name', max_length=255)
     last_name = models.CharField('Last Name', max_length=255)
     telephone = PhoneNumberField()
-    address = models.CharField('Address', max_length=255)
-    city = models.CharField('City', max_length=255)
-    zipcode = models.CharField('Zipcode', max_length=5)
+    address = models.CharField('Address', max_length=255, default="Address")
+    city = models.CharField('City', max_length=255, default="City")
+    zipcode = models.CharField('Zipcode', max_length=5, default="00000")
 
     class Meta:
         abstract = True
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin, CommonInfo):
     """User model"""
 
     email = models.EmailField(('Email address'), unique=True)
@@ -29,8 +29,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     permission = models.PositiveIntegerField(
         default=1)  # Indique le rôle de l'utilisateur
-    first_name = models.CharField('First Name', max_length=255, default="")
-    last_name = models.CharField('Last Name', max_length=255, default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
