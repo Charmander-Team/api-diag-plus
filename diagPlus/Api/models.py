@@ -29,7 +29,7 @@ class Question(models.Model):
 
 class Speciality(models.Model):
     name = models.CharField('Speciality', max_length=255)
-    definition = models.CharField('Defintion', max_length=255)
+    definition = models.CharField('Definition', max_length=255)
 
 
 class Attachment(models.Model):
@@ -47,6 +47,7 @@ class Patient(AbstractBaseUser):
     city = models.CharField('City', max_length=255, default="City")
     zipcode = models.CharField('Zipcode', max_length=5, default="00000")
     birth_date = models.DateField('Birth Date')
+    gender = models.CharField('Gender', max_length=50, default="Male")
     weight = models.PositiveIntegerField('Weight')
     height = models.PositiveIntegerField('Height')
     origin = models.CharField('Origin', max_length=255)
@@ -89,6 +90,9 @@ class Praticien(AbstractBaseUser):
     address = models.CharField('Address', max_length=255, default="Address")
     city = models.CharField('City', max_length=255, default="City")
     zipcode = models.CharField('Zipcode', max_length=5, default="00000")
+    birth_date = models.DateField('Birth Date')
+    gender = models.CharField('Gender', max_length=50, default="Male")
+
     speciality = models.ForeignKey(
         Speciality, on_delete=models.CASCADE, default=1)
     objects = CustomUserManager()
