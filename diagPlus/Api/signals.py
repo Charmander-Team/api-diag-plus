@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from .models import Patient, Praticien
 
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
 @receiver(post_save, sender=Patient)
 @receiver(post_save, sender=Praticien)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
