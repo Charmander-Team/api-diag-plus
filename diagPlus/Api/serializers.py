@@ -84,7 +84,7 @@ class PraticienSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         speciality_data = validated_data.pop('speciality')
         praticien = Praticien.objects.create(**validated_data)
-        Praticien.objects.create(praticien=praticien, **speciality_data)
+        Speciality.objects.create(praticien=praticien, **speciality_data)
         return praticien
 
 
