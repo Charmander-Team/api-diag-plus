@@ -1,4 +1,5 @@
 """Models Creation"""
+from pyexpat import model
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -20,6 +21,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     permission = models.PositiveIntegerField(
         default=1)  # Indique le rôle de l'utilisateur
+    gender = models.CharField(max_length=50, default="Male")
+    height = models.CharField(max_length=50, default=160)
+    weight = models.CharField(max_length=50, default=70)
+    origin = models.CharField(max_length=50, default="Origin")
+    birthdate = models.DateField(default=timezone.now)
+    smoking = models.BooleanField(default=False)
+    alcohol = models.BooleanField(default=False)
+    role = models.CharField(max_length=255, default="Patient")
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
