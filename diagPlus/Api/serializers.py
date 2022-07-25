@@ -30,6 +30,7 @@ class CommonInfoSerializer(serializers.ModelSerializer):
 class SpecialitySerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            'id',
             'name',
             'definition'
         )
@@ -74,17 +75,17 @@ class AdminSerializer(CommonInfoSerializer):
 
 
 class PraticienSerializer(serializers.ModelSerializer):
-    speciality = SpecialitySerializer()
+    speciality = SpecialitySerializer(read_only=False)
 
     class Meta:
         fields = '__all__'
         model = Praticien
 
     def create(self, validated_data):
-        #speciality_data = validated_data.pop('speciality')
-        #praticien = Praticien.objects.create(**validated_data)
-        return Praticien.objects.create(**validated_data)
-        # return praticien
+        speciality_data = validated_data.pop('speciality')
+        praticien = Praticien.objects.create(**validated_data)
+        Praticien.objects.create(praticien=praticien, **speciality_data)
+        return praticien
 
 
 class FileSerializer(serializers.ModelSerializer):

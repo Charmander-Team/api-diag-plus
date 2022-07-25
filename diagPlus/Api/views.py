@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
-from .permissions import isAdminAuthenticated, isOwnerOrReadOnly
+from .permissions import isAdminAuthenticated
 
 # API Views
 
