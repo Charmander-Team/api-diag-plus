@@ -81,10 +81,10 @@ class PraticienSerializer(serializers.ModelSerializer):
         model = Praticien
 
     def create(self, validated_data):
-        speciality_data = validated_data.pop('speciality')
-        praticien = Praticien.objects.create(**validated_data)
-        Speciality.objects.create(praticien=praticien, **speciality_data)
-        return praticien
+        #speciality_data = validated_data.pop('speciality')
+        #praticien = Praticien.objects.create(**validated_data)
+        return Praticien.objects.create(**validated_data)
+        # return praticien
 
 
 class FileSerializer(serializers.ModelSerializer):
