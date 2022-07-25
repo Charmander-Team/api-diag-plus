@@ -8,6 +8,21 @@ class isAdminAuthenticated(BasePermission):
         return bool(request.user and request.user.is_authenticated and request.user.is_superuser)
 
 
+class IsLoggedInUserOrAdmin(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        return obj == request.user or request.user.is_staff
+
+
+class IsAdminUser(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_staff
+
+    def has_object_permission(self, request, view, obj):
+        return request.user and request.user.is_staff
+
+
 class isOwnerOrReadOnly(BasePermission):
     # check if the user is the owner of the object
     edit_methods = ("PUT", "PATCH")

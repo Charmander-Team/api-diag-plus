@@ -23,7 +23,7 @@ class CommonInfoSerializer(serializers.ModelSerializer):
             'city',
             'zipcode'
         )
-        model: CommonInfo
+        model = CommonInfo
         abstract = True
 
 
@@ -74,8 +74,8 @@ class AdminSerializer(CommonInfoSerializer):
         model = Admin
 
 
-class PraticienSerializer(serializers.ModelSerializer):
-    speciality = SpecialitySerializer(read_only=False)
+class PraticienSerializer(CommonInfoSerializer):
+    speciality = SpecialitySerializer(read_only=True, many=False)
 
     class Meta:
         fields = '__all__'
@@ -83,7 +83,7 @@ class PraticienSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         speciality_data = validated_data.pop('speciality')
-        praticien = Praticien.objects.create(**validated_data)
+        praticien = Praticien.objects.create_user(**validated_data)
         Speciality.objects.create(praticien=praticien, **speciality_data)
         return praticien
 

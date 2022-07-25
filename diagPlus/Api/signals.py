@@ -7,11 +7,16 @@ from .models import Patient, Praticien
 
 
 @receiver(post_save, sender=Patient)
-@receiver(post_save, sender=Praticien)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
 
-for user in User.objects.all():
+@receiver(post_save, sender=Praticien)
+def create_auth_tokenv2(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
+
+
+for user in Praticien.objects.all():
     Token.objects.get_or_create(user=user)
