@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
     """Custom Form for user creation on the admin panel"""
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    model = User
+    model = Admin
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
@@ -27,7 +27,6 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
-admin.site.register(User, CustomUserAdmin)
 admin.site.register(Speciality)
 admin.site.register(Question)
 admin.site.register(Patient)
@@ -35,7 +34,7 @@ admin.site.register(ReportPatient)
 admin.site.register(Files)
 admin.site.register(Appointment)
 admin.site.register(Praticien)
-admin.site.register(Admin)
+admin.site.register(Admin, CustomUserAdmin)
 admin.site.register(Planning)
 admin.site.register(Diagnostic)
 admin.site.register(Response)

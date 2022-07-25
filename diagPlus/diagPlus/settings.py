@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# NEVER PUT YOUR SECRET KEY HERE. Put it in a .env file 
+# NEVER PUT YOUR SECRET KEY HERE. Put it in a .env file
 env = environ.Env()
 # Read the .env file
 environ.Env().read_env()
 SECRET_KEY = env('SECRET_KEY')
-AUTH_USER_MODEL = 'Api.User'
+AUTH_USER_MODEL = 'Api.Admin'
 
 
 # Database
@@ -38,10 +38,10 @@ AUTH_USER_MODEL = 'Api.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("DATABASE_NAME"), # Database Name
+        'NAME': env("DATABASE_NAME"),  # Database Name
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST' : env('DATABASE_HOST'),
+        'HOST': env('DATABASE_HOST'),
     }
 }
 
@@ -101,8 +101,8 @@ TEMPLATES = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
-MEDIA_URL ='/image/'
-MEDIA_ROOT=os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/image/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 WSGI_APPLICATION = 'diagPlus.wsgi.application'
 
@@ -138,19 +138,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-SWAGGER_SETTINGS= {
+SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
-      'Basic': {
+        'Basic': {
             'type': 'basic'
-      },
-      'Bearer': {
+        },
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
-      }
+        }
     },
     'USE_SESSION_AUTH': False,
-    
+
 }
 
 

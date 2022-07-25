@@ -9,6 +9,7 @@ from .managers import CustomUserManager
 
 class CommonInfo(models.Model):
     """Class abstraite regroupant les données communes"""
+    email = models.EmailField(('Email address'), unique=True)
     first_name = models.CharField('First Name', max_length=255)
     last_name = models.CharField('Last Name', max_length=255)
     telephone = PhoneNumberField()
@@ -18,25 +19,6 @@ class CommonInfo(models.Model):
 
     class Meta:
         abstract = True
-
-
-class User(AbstractBaseUser, PermissionsMixin, CommonInfo):
-    """User model"""
-
-    email = models.EmailField(('Email address'), unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    permission = models.PositiveIntegerField(
-        default=1)  # Indique le rôle de l'utilisateur
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return str(self.email)
 
 
 class Question(models.Model):
@@ -56,26 +38,65 @@ class Attachment(models.Model):
     name = models.CharField('Name', max_length=255)
 
 
-class Patient(CommonInfo):
+class Patient(AbstractBaseUser):
+    email = models.EmailField(('Email address'), unique=True)
+    first_name = models.CharField('First Name', max_length=255)
+    last_name = models.CharField('Last Name', max_length=255)
+    telephone = PhoneNumberField()
+    address = models.CharField('Address', max_length=255, default="Address")
+    city = models.CharField('City', max_length=255, default="City")
+    zipcode = models.CharField('Zipcode', max_length=5, default="00000")
     birth_date = models.DateField('Birth Date')
     weight = models.PositiveIntegerField('Weight')
     height = models.PositiveIntegerField('Height')
     origin = models.CharField('Origin', max_length=255)
     smoker = models.BooleanField('Smoker')
     is_drinker = models.BooleanField('Drinker')
-    users = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return str(self.email)
 
 
-class Admin(models.Model):
+class Admin(AbstractBaseUser, PermissionsMixin, CommonInfo):
+    """Admin model"""
+
+    email = models.EmailField(
+        ('Email address'), unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    permission = models.PositiveIntegerField(
+        default=1)  # Indique le rôle de l'utilisateur
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return str(self.email)
+
+
+class Praticien(AbstractBaseUser):
+    email = models.EmailField(('Email address'), unique=True)
     first_name = models.CharField('First Name', max_length=255)
     last_name = models.CharField('Last Name', max_length=255)
-    users = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
-
-class Praticien(CommonInfo):
-    users = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    telephone = PhoneNumberField()
+    address = models.CharField('Address', max_length=255, default="Address")
+    city = models.CharField('City', max_length=255, default="City")
+    zipcode = models.CharField('Zipcode', max_length=5, default="00000")
     speciality = models.ForeignKey(
         Speciality, on_delete=models.CASCADE, default=1)
+    objects = CustomUserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return str(self.email)
 
 
 class Files(models.Model):

@@ -8,12 +8,6 @@ from .permissions import isAdminAuthenticated, isOwnerOrReadOnly
 # API Views
 
 
-class ListUser(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    permission_classes = [isOwnerOrReadOnly]
-    queryset = User.objects.all()
-
-
 class ListSpeciality(viewsets.ModelViewSet):
     serializer_class = SpecialitySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -34,7 +28,6 @@ class ListAttachment(viewsets.ModelViewSet):
 
 class ListPatient(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Patient.objects.all()
 
 
@@ -46,7 +39,6 @@ class ListAdmin(viewsets.ModelViewSet):
 
 class ListPraticien(viewsets.ModelViewSet):
     serializer_class = PraticienSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Praticien.objects.all()
 
 
@@ -104,13 +96,10 @@ class ListSymptom(viewsets.ModelViewSet):
     queryset = Symptom.objects.all()
 
 
-class AdminUser(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
+class ListAdmin(viewsets.ModelViewSet):
+    serializer_class = AdminSerializer
     # Restrict the access to the admin only
     permission_classes = [isAdminAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.all()
 
 
 class GetTokenPair(TokenObtainPairView):
