@@ -28,7 +28,7 @@ env = environ.Env()
 # Read the .env file
 environ.Env().read_env()
 SECRET_KEY = env('SECRET_KEY')
-AUTH_USER_MODEL = 'Api.Patient'
+AUTH_USER_MODEL = 'Api.User'
 
 
 # Database

@@ -26,11 +26,7 @@ class ListAttachment(viewsets.ModelViewSet):
     queryset = Attachment.objects.all()
 
 
-class ListPatient(viewsets.ModelViewSet):
-    serializer_class = PatientSerializer
-    queryset = Patient.objects.all()
-
-    def get_permissions(self):
+"""     def get_permissions(self):
         permission_classes = []
         if self.action == 'create':
             permission_classes = [AllowAny]
@@ -38,18 +34,7 @@ class ListPatient(viewsets.ModelViewSet):
             permission_classes = [IsLoggedInUserOrAdmin]
         elif self.action == 'list' or self.action == 'destroy':
             permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
-
-
-class ListAdmin(viewsets.ModelViewSet):
-    serializer_class = AdminSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Admin.objects.all()
-
-
-class ListPraticien(viewsets.ModelViewSet):
-    serializer_class = PraticienSerializer
-    queryset = Praticien.objects.all()
+        return [permission() for permission in permission_classes] """
 
 
 class ListFiles(viewsets.ModelViewSet):
@@ -104,12 +89,6 @@ class ListSymptom(viewsets.ModelViewSet):
     serializer_class = SymptomSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Symptom.objects.all()
-
-
-class ListAdmin(viewsets.ModelViewSet):
-    serializer_class = AdminSerializer
-    # Restrict the access to the admin only
-    permission_classes = [isAdminAuthenticated]
 
 
 class GetTokenPair(TokenObtainPairView):

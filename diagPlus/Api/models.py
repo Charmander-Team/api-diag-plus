@@ -7,8 +7,7 @@ from django.utils import timezone
 from .managers import CustomUserManager
 
 
-class CommonInfo(models.Model):
-    """Class abstraite regroupant les données communes"""
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(('Email address'), unique=True)
     first_name = models.CharField('First Name', max_length=255)
     last_name = models.CharField('Last Name', max_length=255)
@@ -16,9 +15,18 @@ class CommonInfo(models.Model):
     address = models.CharField('Address', max_length=255, default="Address")
     city = models.CharField('City', max_length=255, default="City")
     zipcode = models.CharField('Zipcode', max_length=5, default="00000")
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    permission = models.PositiveIntegerField(
+        default=1)  # Indique le rôle de l'utilisateur
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
-    class Meta:
-        abstract = True
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return str(self.email)
 
 
 class Question(models.Model):
@@ -38,71 +46,6 @@ class Attachment(models.Model):
     name = models.CharField('Name', max_length=255)
 
 
-class Patient(AbstractBaseUser):
-    email = models.EmailField(('Email address'), unique=True)
-    first_name = models.CharField('First Name', max_length=255)
-    last_name = models.CharField('Last Name', max_length=255)
-    telephone = PhoneNumberField()
-    address = models.CharField('Address', max_length=255, default="Address")
-    city = models.CharField('City', max_length=255, default="City")
-    zipcode = models.CharField('Zipcode', max_length=5, default="00000")
-    birth_date = models.DateField('Birth Date')
-    gender = models.CharField('Gender', max_length=50, default="Male")
-    weight = models.PositiveIntegerField('Weight')
-    height = models.PositiveIntegerField('Height')
-    origin = models.CharField('Origin', max_length=255)
-    smoker = models.BooleanField('Smoker')
-    is_drinker = models.BooleanField('Drinker')
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return str(self.email)
-
-
-class Admin(AbstractBaseUser, PermissionsMixin, CommonInfo):
-    """Admin model"""
-
-    email = models.EmailField(
-        ('Email address'), unique=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    permission = models.PositiveIntegerField(
-        default=1)  # Indique le rôle de l'utilisateur
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    objects = CustomUserManager()
-
-    def __str__(self):
-        return str(self.email)
-
-
-class Praticien(AbstractBaseUser):
-    email = models.EmailField(('Email address'), unique=True)
-    first_name = models.CharField('First Name', max_length=255)
-    last_name = models.CharField('Last Name', max_length=255)
-    telephone = PhoneNumberField()
-    address = models.CharField('Address', max_length=255, default="Address")
-    city = models.CharField('City', max_length=255, default="City")
-    zipcode = models.CharField('Zipcode', max_length=5, default="00000")
-    birth_date = models.DateField('Birth Date')
-    gender = models.CharField('Gender', max_length=50, default="Male")
-
-    speciality = models.ForeignKey(
-        Speciality, on_delete=models.CASCADE, default=1)
-    objects = CustomUserManager()
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    def __str__(self):
-        return str(self.email)
-
-
 class Files(models.Model):
     antecedent = models.CharField('Antecedent', max_length=255)
     allergy = models.CharField('Allergy', max_length=255)
@@ -111,13 +54,11 @@ class Files(models.Model):
     previous_medication = models.CharField(
         'Previous Medication', max_length=255)
     current_medication = models.CharField('Current Medication', max_length=255)
-    patients = models.ForeignKey(Patient, on_delete=models.CASCADE, default=1)
 
 
 class ReportPatient(models.Model):
     type = models.CharField('Type', max_length=255)
     contenu = models.CharField('Content', max_length=255)
-    patients = models.ForeignKey(Patient, on_delete=models.CASCADE, default=1)
     attachment = models.ForeignKey(
         Attachment, on_delete=models.CASCADE, default=1)
 
@@ -128,17 +69,12 @@ class Appointment(models.Model):
     date = models.DateTimeField()
     reason = models.TextField('Reason')
     physical = models.BooleanField('Physical')
-    patients = models.ForeignKey(Patient, on_delete=models.CASCADE, default=1)
-    practiciens = models.ForeignKey(
-        Praticien, on_delete=models.CASCADE, default=1)
 
 
 class Planning(models.Model):
     current_date = models.DateField()
     start_hours = models.DateTimeField()
     end_hours = models.DateTimeField()
-    practiciens = models.ForeignKey(
-        Praticien, on_delete=models.CASCADE, default=1)
 
 
 class Diagnostic(models.Model):
@@ -146,9 +82,6 @@ class Diagnostic(models.Model):
     pathology_bot = models.PositiveIntegerField()
     pathology_practicien = models.PositiveIntegerField()
     percentage = models.FloatField()
-    patients = models.ForeignKey(Patient, on_delete=models.CASCADE, default=1)
-    practiciens = models.ForeignKey(
-        Praticien, on_delete=models.CASCADE, default=1)
 
 
 class Response(models.Model):
