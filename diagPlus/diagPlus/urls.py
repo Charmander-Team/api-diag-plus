@@ -15,6 +15,7 @@ from drf_yasg import openapi
 router = routers.DefaultRouter()
 
 # Api Routes
+router.register(r'users', views.ListUser, 'user')
 router.register(r'specialities', views.ListSpeciality, 'speciality')
 router.register(r'questions', views.ListQuestion, 'question')
 router.register(r'attachements', views.ListAttachment, 'attachment')

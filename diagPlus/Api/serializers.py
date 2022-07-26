@@ -13,6 +13,13 @@ class TokenPairSerializer(TokenObtainPairSerializer):
         return token
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name', 'address', 'city', 'zipcode', 'telephone',
+                  'date_joined', 'birthdate', 'gender', 'height', 'weight', 'origin', 'smoking', 'alcohol', 'role')
+
+
 class SpecialitySerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -53,7 +60,6 @@ class FileSerializer(serializers.ModelSerializer):
             'organ_donation',
             'previous_medication',
             'current_medication',
-            'patients'
         )
         model = Files
 
@@ -65,7 +71,6 @@ class ReportPatientSerializer(serializers.ModelSerializer):
         fields = (
             'type',
             'contenu',
-            'patients',
             'attachments'
         )
         model = ReportPatient
