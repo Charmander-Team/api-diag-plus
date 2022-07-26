@@ -1,4 +1,5 @@
 """Models Creation"""
+from email.policy import default
 from pyexpat import model
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -12,7 +13,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(('Email address'), unique=True)
     first_name = models.CharField('First Name', max_length=255)
     last_name = models.CharField('Last Name', max_length=255)
-    telephone = PhoneNumberField()
+    telephone = PhoneNumberField(default='+33123456789')
     address = models.CharField('Address', max_length=255, default="Address")
     city = models.CharField('City', max_length=255, default="City")
     zipcode = models.CharField('Zipcode', max_length=5, default="00000")

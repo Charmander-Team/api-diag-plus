@@ -16,8 +16,12 @@ class TokenPairSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'address', 'city', 'zipcode', 'telephone',
+        fields = ('id', 'email', 'password', 'first_name', 'last_name', 'address', 'city', 'zipcode', 'telephone',
                   'date_joined', 'birthdate', 'gender', 'height', 'weight', 'origin', 'smoking', 'alcohol', 'role')
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
 
 class SpecialitySerializer(serializers.ModelSerializer):
