@@ -23,6 +23,33 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.password = validated_data.get('password', instance.password)
+        instance.first_name = validated_data.get(
+            'first_name', instance.first_name)
+        instance.last_name = validated_data.get(
+            'last_name', instance.last_name)
+        instance.address = validated_data.get('address', instance.address)
+        instance.city = validated_data.get('city', instance.city)
+        instance.zipcode = validated_data.get('zipcode', instance.zipcode)
+        instance.telephone = validated_data.get(
+            'telephone', instance.telephone)
+        instance.date_joined = validated_data.get(
+            'date_joined', instance.date_joined)
+        instance.birthdate = validated_data.get(
+            'birthdate', instance.birthdate)
+        instance.gender = validated_data.get('gender', instance.gender)
+        instance.height = validated_data.get('height', instance.height)
+        instance.weight = validated_data.get('weight', instance.weight)
+        instance.origin = validated_data.get('origin', instance.origin)
+        instance.smoking = validated_data.get('smoking', instance.smoking)
+        instance.alcohol = validated_data.get('alcohol', instance.alcohol)
+        instance.role = validated_data.get('role', instance.role)
+        instance.set_password(instance.password)
+        instance.save()
+        return instance
+
 
 class SpecialitySerializer(serializers.ModelSerializer):
     class Meta:
