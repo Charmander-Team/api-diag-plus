@@ -16,9 +16,9 @@ class ListUser(viewsets.ModelViewSet):
         permission_classes = []
         if self.action == 'create':
             permission_classes = [AllowAny]
-        elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+        elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update' or self.action == 'destroy':
             permission_classes = [IsLoggedInUserOrAdmin]
-        elif self.action == 'list' or self.action == 'destroy':
+        elif self.action == 'list':
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
